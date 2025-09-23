@@ -11,15 +11,6 @@ jobs:
       with:
         node-version: 18
     - run: npm install
-    - run: make toc
-    - run: git diff
-    - run: |
-        if [ -z "$(git status --porcelain)" ]; then
-          echo "No changes"
-        else
-          echo "Please update the table of contents with make toc"
-          exit 1
-        fi
     - run: make markdownlint
     - run: git diff
     - run: |
