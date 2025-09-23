@@ -1,10 +1,14 @@
+---
+sidebar_label: Style Guide
+---
+
 # Rego Style Guide
 
 <!-- The source of truth for this file is at https://github.com/StyraInc/rego-style-guide/blob/main/style-guide.md -->
 
 The purpose of this style guide is to provide a collection of recommendations and best practices for authoring
 [Rego](https://www.openpolicyagent.org/docs/latest/policy-language/).
-From [Styra](https://www.styra.com), the founders of [Open Policy Agent](https://www.openpolicyagent.org) (OPA),
+From the maintainers of [Open Policy Agent](https://www.openpolicyagent.org) (OPA),
 and some of the most experienced members of the community,
 we hope to share lessons learnt from authoring and reviewing hundreds of thousands of lines of Rego over the years.
 
@@ -14,61 +18,9 @@ and see the changelog for updates since your last visit.
 
 ## Regal
 
-Inspired by this style guide, [Regal](https://github.com/StyraInc/regal) is a new linter for Rego that allows you
+Inspired by this style guide, [Regal](/projects/regal) is a new linter for Rego that allows you
 to enforce many of the recommendations in this guide, as well as identifying issues, bugs and potential problems in your
 Rego policies. If you enjoy this style guide, make sure to check it out!
-
-## Contents
-
-<!-- markdownlint-capture -->
-<!-- markdownlint-disable -->
-<!-- run make toc to update -->
-
-<!-- toc -->
-
-* [General Advice](#general-advice)
-  * [Optimize for readability, not performance](#optimize-for-readability-not-performance)
-  * [Use `opa fmt`](#use-opa-fmt)
-  * [Use strict mode](#use-strict-mode)
-  * [Use metadata annotations](#use-metadata-annotations)
-  * [Get to know the built-in functions](#get-to-know-the-built-in-functions)
-  * [Consider using JSON schemas for type checking](#consider-using-json-schemas-for-type-checking)
-* [Style](#style)
-  * [Prefer snake_case for rule names and variables](#prefer-snake_case-for-rule-names-and-variables)
-  * [Optionally, use leading underscore for rules intended for internal use](#optionally-use-leading-underscore-for-rules-intended-for-internal-use)
-  * [Keep line length `<=` 120 characters](#keep-line-length--120-characters)
-* [Rules](#rules)
-  * [Use helper rules and functions](#use-helper-rules-and-functions)
-  * [Use negation to handle undefined](#use-negation-to-handle-undefined)
-  * [Consider partial helper rules over comprehensions in rule bodies](#consider-partial-helper-rules-over-comprehensions-in-rule-bodies)
-  * [Avoid prefixing rules and functions with `get_` or `list_`](#avoid-prefixing-rules-and-functions-with-get_-or-list_)
-  * [Prefer unconditional assignment in rule head over rule body](#prefer-unconditional-assignment-in-rule-head-over-rule-body)
-* [Variables and Data Types](#variables-and-data-types)
-  * [Use `in` to check for membership](#use-in-to-check-for-membership)
-  * [Prefer `some .. in` for iteration](#prefer-some--in-for-iteration)
-  * [Use `every` to express FOR ALL](#use-every-to-express-for-all)
-  * [Don't use unification operator for assignment or comparison](#dont-use-unification-operator-for-assignment-or-comparison)
-  * [Don't use undeclared variables](#dont-use-undeclared-variables)
-  * [Prefer sets over arrays (where applicable)](#prefer-sets-over-arrays-where-applicable)
-* [Functions](#functions)
-  * [Prefer using arguments over `input`, `data` or rule references](#prefer-using-arguments-over-input-data-or-rule-references)
-  * [Avoid using the last argument for the return value](#avoid-using-the-last-argument-for-the-return-value)
-* [Regex](#regex)
-  * [Use raw strings for regex patterns](#use-raw-strings-for-regex-patterns)
-* [Packages](#packages)
-  * [Package name should match file location](#package-name-should-match-file-location)
-* [Imports](#imports)
-  * [Prefer importing packages over rules and functions](#prefer-importing-packages-over-rules-and-functions)
-  * [Avoid importing `input`](#avoid-importing-input)
-* [Older Advice](#older-advice)
-  * [Use explicit imports for future keywords](#use-explicit-imports-for-future-keywords)
-* [Contributing](#contributing)
-* [Community](#community)
-
-<!-- tocstop -->
-
-<!-- markdownlint-enable -->
-<!-- markdownlint-restore -->
 
 ## General Advice
 
@@ -115,8 +67,8 @@ indent_size = 4
 Sadly, there doesn't seem to be a way to enforce this for code blocks displayed in markdown (`.md`) files.
 
 :::tip
-You can lint for this recommendation using the [`opa-fmt`](https://docs.styra.com/regal/rules/style/opa-fmt)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`opa-fmt`](/projects/regal/rules/style/opa-fmt)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ### Use strict mode
@@ -228,8 +180,8 @@ prone to inconsistencies, as you'll likely end up mixing different styles in the
 code, etc).
 
 :::tip
-You can lint for this recommendation using the [`prefer-snake-case`](https://docs.styra.com/regal/rules/style/prefer-snake-case)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`prefer-snake-case`](/projects/regal/rules/style/prefer-snake-case)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ### Optionally, use leading underscore for rules intended for internal use
@@ -257,7 +209,7 @@ be considered to what **this** package considers a developer, and not necessaril
 underscore to denote this is a good way to communicate this intent, but there are also other ways to do this, like
 agreed upon naming conventions, or using custom metadata annotation attributes.
 
-One benefit of sticking to the leading underscore convention is that tools like [Regal](https://docs.styra.com/regal),
+One benefit of sticking to the leading underscore convention is that tools like [Regal](/projects/regal),
 and the language server for Rego that it provides, may use this information to provide better suggestions, like not
 adding references to these rules and functions from other packages.
 
@@ -281,8 +233,8 @@ frontend_admin_users := [username |
 ```
 
 :::tip
-You can lint for this recommendation using the [`line-length`](https://docs.styra.com/regal/rules/style/line-length)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`line-length`](/projects/regal/rules/style/line-length)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ## Rules
@@ -465,8 +417,8 @@ Using `is_`, or `has_` for boolean helper functions, like `is_admin(user)` may b
 `admin(user)`.
 
 :::tip
-You can lint for this recommendation using the [`avoid-get-and-list-prefix`](https://docs.styra.com/regal/rules/style/avoid-get-and-list-prefix)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`avoid-get-and-list-prefix`](/projects/regal/rules/style/avoid-get-and-list-prefix)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ### Prefer unconditional assignment in rule head over rule body
@@ -493,8 +445,8 @@ divide_by_ten(x) := x / 10
 ```
 
 :::tip
-You can lint for this recommendation using the [`unconditional-assignment`](https://docs.styra.com/regal/rules/style/unconditional-assignment)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`unconditional-assignment`](/projects/regal/rules/style/unconditional-assignment)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ## Variables and Data Types
@@ -532,8 +484,8 @@ deny contains "Only admin allowed" if not "admin" in input.user.roles
 ```
 
 :::tip
-You can lint for this recommendation using the [`use-in-operator`](https://docs.styra.com/regal/rules/idiomatic/use-in-operator)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`use-in-operator`](/projects/regal/rules/idiomatic/use-in-operator)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ### Prefer `some .. in` for iteration
@@ -605,8 +557,8 @@ all_hostnames := [hostname |
 ```
 
 :::tip
-You can lint for this recommendation using the [`prefer-some-in-iteration`](https://docs.styra.com/regal/rules/style/prefer-some-in-iteration)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`prefer-some-in-iteration`](/projects/regal/rules/style/prefer-some-in-iteration)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ### Use `every` to express FOR ALL
@@ -756,8 +708,8 @@ router {
 - [OPA fmt 2.0](https://github.com/open-policy-agent/opa/issues/4508)
 
 :::tip
-You can lint for this recommendation using the [`use-assignment-operator`](https://docs.styra.com/regal/rules/style/use-assignment-operator)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`use-assignment-operator`](/projects/regal/rules/style/use-assignment-operator)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ### Don't use undeclared variables
@@ -793,8 +745,8 @@ messages contains message if {
 ```
 
 :::tip
-You can lint for this recommendation using the [`use-some-for-output-vars`](https://docs.styra.com/regal/rules/idiomatic/use-some-for-output-vars)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`use-some-for-output-vars`](/projects/regal/rules/idiomatic/use-some-for-output-vars)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ### Prefer sets over arrays (where applicable)
@@ -905,8 +857,8 @@ While the first form is valid, it is almost guaranteed to confuse developers com
 languages. Again, optimize for readability!
 
 :::tip
-You can lint for this recommendation using the [`function-arg-return`](https://docs.styra.com/regal/rules/style/function-arg-return)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`function-arg-return`](/projects/regal/rules/style/function-arg-return)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ## Regex
@@ -931,8 +883,8 @@ all_digits if {
 ```
 
 :::tip
-You can lint for this recommendation using the [`non-raw-regex-pattern`](https://docs.styra.com/regal/rules/idiomatic/non-raw-regex-pattern)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`non-raw-regex-pattern`](/projects/regal/rules/idiomatic/non-raw-regex-pattern)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ## Packages
@@ -1014,8 +966,8 @@ allow if user.is_admin
 ```
 
 :::tip
-You can lint for this recommendation using the [`prefer-package-imports`](https://docs.styra.com/regal/rules/imports/prefer-package-imports)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`prefer-package-imports`](/projects/regal/rules/imports/prefer-package-imports)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ### Avoid importing `input`
@@ -1068,8 +1020,8 @@ violations contains message if {
 ```
 
 :::tip
-You can lint for this recommendation using the [`avoid-importing-input`](https://docs.styra.com/regal/rules/imports/avoid-importing-input)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`avoid-importing-input`](/projects/regal/rules/imports/avoid-importing-input)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ## Older Advice
@@ -1113,8 +1065,8 @@ severe_violations contains violation if {
 Leaving out the import of `in` when `every` is imported is considered okay.
 
 :::tip
-You can lint for this recommendation using the [`implicit-future-keywords`](https://docs.styra.com/regal/rules/imports/implicit-future-keywords)
-Regal rule. Get started with [Regal, the Rego linter](https://docs.styra.com/regal).
+You can lint for this recommendation using the [`implicit-future-keywords`](/projects/regal/rules/imports/implicit-future-keywords)
+Regal rule. Get started with [Regal, the Rego linter](/projects/regal).
 :::
 
 ---
@@ -1126,9 +1078,3 @@ we welcome contributions from any of its members. Since most of the topics in a 
 discussion, please open an issue, and allow some time for people to comment, before opening a PR.
 
 If you'd like to add or remove items for your own company, team or project, forking this repo is highly encouraged!
-
-## Community
-
-For questions, discussions and announcements related to
-Styra products, services and open source projects, please join
-the Styra community on [Slack](https://inviter.co/styra)!
