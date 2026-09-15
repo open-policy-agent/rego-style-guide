@@ -6,7 +6,7 @@
 # Rego Style Guide
 
 This repository contains source code for the
-[Rego Style Guide](https://openpolicyagent.org/docs/rego-style-guide).
+[Rego Style Guide](https://www.openpolicyagent.org/docs/style-guide).
 
 The purpose of this style guide is to provide a collection of recommendations
 and best practices for authoring
