@@ -430,11 +430,11 @@ in the rule body adds unnecessary noise.
 
 **Avoid**
 ```rego
-full_name := name {
+full_name := name if {
     name := concat(", ", [input.first_name, input.last_name])
 }
 
-divide_by_ten(x) := y {
+divide_by_ten(x) := y if {
     y := x / 10
 }
 ```
@@ -461,7 +461,7 @@ checking if something is _not_ part of a collection.
 **Avoid**
 ```rego
 # "Old" way of checking for membership - iteration + comparison
-allow {
+allow if {
     "admin" == input.user.roles[_]
 }
 ```
@@ -685,15 +685,15 @@ where you'll want to do both comparison and assignment to variables from the pat
 
 ```rego
 # Using unification - compact but clear
-router {
+router if {
     some user_id, podcast_id
-    ["users", user_id, "podcasts", podcast_id] = input.request.path
+    ["users", user_id, "podcasts", podcast_id] = input.request_path
 
     # .. do something with user_id, podcast_id
 }
 
 # Using comparison + assignment - arguably messier
-router {
+router if {
     input.request_path[0] == "users"
     input.request_path[2] == "podcasts"
 
